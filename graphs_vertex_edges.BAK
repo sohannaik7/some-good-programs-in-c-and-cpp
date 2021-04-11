@@ -1,0 +1,110 @@
+//#include<bits/stdc++.h>
+#include<iostream.h>
+#include<stdlib.h>
+#include<conio.h>
+
+int v,src,adj[100][100],n,i;
+#define infi 999;   //as infinity detection
+ int dist[100];// fro the distance
+// int hun=100;
+ int visited[100] = {0};//for visited node
+ int parent[100];
+int getnearest();
+
+
+class Search
+{
+  public:
+	void insert()
+	{
+	cout<<"enter the number of vertex"<<"\t"<<endl;
+	cin>>n;
+	cout<<"enter the vertex"<<endl;
+	 for(int i=0;i<n;i++)
+	 {
+	   for(int j=0;j<n;j++)
+	    {
+	    cin>>adj[i][j];
+	    }
+	  }
+
+	  cout<<"enter the strating veertex"<<endl;
+	}
+
+	void inial()
+	{
+	 for(int i=0;i<n;i++)
+	  {
+	  parent[i]=i;
+	   dist[i]=infi;
+	  }
+	  dist[src]=0;
+	}
+
+	void dijkstra()
+	{
+	 for(int i=0;i<n;i++)
+	  {
+	   int nearest=getnearest();//to get the nearst unvisited node
+	   visited[nearest]=1; //we mark it was visited node
+
+	   for(int ad=0;ad<n;ad++)
+	    {
+	    //we check if all adjecsnt node
+	       if((adj[nearest][ad]!=infi)&&(dist[ad] > (dist[nearest]+adj[nearest][ad])))
+		 {  //formula from youtube vle<1+2
+		 //i'll upfate the ditance value if the new distance
+		 // value is lesser than the count
+			 dist[ad]=dist[nearest]+adj[nearest][ad];
+			 parent[ad]=nearest;
+		 }
+	    }
+	  }
+	}
+
+};
+
+
+
+int getnearest()
+ {
+  int minvalue = infi;//for the minnum value of distance
+ int minnode=0;
+ for(int i=0;i<n;i++)
+  {
+   if(visited[i]!=1 && dist[i]<minvalue)
+   {
+		    minvalue=dist[i];
+		    minnode=i;
+   }
+  }
+   return minnode;
+
+ }
+
+void main()
+ {
+// clrscr();
+  Search se;
+  se.insert();
+  se.inial();
+  se.dijkstra();
+
+  cout<<"node is:\t\t\t adj is:\t\t\t path is"<<endl;
+  for(int i=0;i<n;i++)
+   {
+    cout<<i<<"\t\t\t"<<dist[i]<<"\t\t\t"<<" ";
+
+    cout<<i<<" ";
+    int parnode=parent[i];
+
+    while(parnode!=src)
+     {
+      cout<<"<=="<<parnode<<" ";
+      parnode=parent[parnode];
+
+     }
+     cout<<endl;
+    }
+    getch();
+  }

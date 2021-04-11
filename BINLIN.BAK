@@ -1,0 +1,144 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int bin(int low,int up,int mid,int n,int arr[],int ser);
+int lin(int n,int arr[],int ser,int beg);
+int pos;
+clock_t time_r,time_rr;
+void main()
+{
+time_r=clock();
+time_rr=clock();
+   int i,n;
+   int ser,pos1,pos2;
+   int arr[2500];
+    int temp,j,ele;
+    int low,up,mid,beg;
+   clrscr();
+	 cout<<"enter the size of array"<<endl;
+	 cin>>n;
+
+	 for(i=0; i<n; i++)
+	 {
+	ele=rand() % 100;
+	if(ele==0)
+		{
+			ele=ele+20;
+			arr[i]=ele;
+		}
+		else
+		{
+			arr[i]=ele;
+		}
+	 }
+	for(i=0;i<n;i++)
+	{
+	 for(j=0;j<n;j++)
+	  {
+	   if(arr[i]<arr[j])
+	   {
+	     temp=arr[j];
+	     arr[j]=arr[i];
+	     arr[i]=temp;
+	    }
+	   }
+	  }
+	  for(i=0;i<n;i++)
+	   {
+	    cout<<arr[i]<<"\t";
+	   }
+
+	   cout<<"chose the number you wanna search"<<endl;
+	   cin>>ser;
+
+	  low=0;
+	  up=n;
+	  mid=(low+up)/2;
+
+	  pos1=bin(low,up,mid,n,arr,ser);
+	  time_r=clock()-time_r;
+	 if(pos1==1)
+	 {
+	  cout<<"item found"<<"\t"<<endl<<"total time"<<"\t"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+	  }
+	  else
+	  {
+	  cout<<"not found"<<"\t"<<"time"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+	  }
+	 // time_r=clock()-time_r;
+	  time_r=clock();
+	  cout<<"enter the element u wanna search in liner saerch"<<endl;
+	  cin>>ser;
+	  beg=0;
+	  //time_rr=clock()-time_rr;
+	  pos2=lin(n,arr,ser,beg);
+	  time_r=clock()-time_r;
+		 if(pos2==1)
+		 {
+		  cout<<"item found"<<endl<<"total time"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+		 }
+		 else
+		 {
+		  cout<<"item not found"<<endl<<"total time "<<(float)time_rr/CLOCKS_PER_SEC<<endl;
+		 }
+	  getch();
+}
+
+int bin(int low,int up,int mid,int n,int arr[],int ser)
+{
+ if(n!=0)
+ {
+  if(arr[mid]==ser)
+   {
+   pos=1;
+    return pos;
+    }
+
+   if(ser>arr[mid])
+    {
+     low=mid;
+     mid=(low+up)/2;
+     n=n-1;
+     return bin(low,up,mid,n,arr,ser);
+    }
+    else
+    {
+    up=mid;
+    mid=(low+up)/2;
+    n=n-1;
+    return bin(low,up,mid,n,arr,ser);
+    }
+    }
+ else
+ {
+ pos=10;
+ return pos;
+ }
+}
+
+int lin(int n,int arr[],int ser,int beg)
+ {
+ if(n!=0)
+  {
+    if(arr[beg]==ser)
+     {
+	 pos=1;
+	 return pos;
+     }
+     else
+     {
+	 beg++;
+	 n--;
+	return lin(n,arr,ser,beg);
+     }
+    }
+  else
+  {
+  pos=10;
+  return pos;
+   }
+ }
+
+

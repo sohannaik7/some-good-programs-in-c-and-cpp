@@ -1,0 +1,64 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+
+void insertsort(int array[],int n);
+
+void main()
+{
+
+ int n,i,arr[9999],ele,size;
+ clock_t time_r;
+clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     arr[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+    time_r=clock();
+     //ass=0;
+    insertsort(arr,n);
+     cout<<n<<endl;
+   //............
+    //time_r=clock()-time_r;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+   cout<<"time consumed"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+
+  // return 1;
+   getch();
+  // return 1;
+}
+void insertSort(int array[], int n) {
+   int key, j;
+   for(int i = 1; i<n; i++) {
+      key = array[i];//take value
+      j = i;
+      while(j > 0 && array[j-1]>key) {
+         array[j] = array[j-1];
+         j--;
+      }
+      array[j] = key;   //insert in right place
+   }
+}

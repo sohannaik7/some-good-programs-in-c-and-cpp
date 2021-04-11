@@ -1,0 +1,98 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+
+void quicksort(int array[],int start,int ending);
+int seprate(int array[],int s,int e);
+
+
+void main()
+{
+
+ int n,i,arr[9999],ele,start,ending;
+ clock_t time_r;
+clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     arr[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+    time_r=clock();
+     //ass=0;
+     start=0;
+     ending=n;
+    quicksort(arr,start,ending);
+     cout<<n<<endl;
+   //............
+    //time_r=clock()-time_r;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+   cout<<"time consumed"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+
+  // return 1;
+   getch();
+  // return 1;
+}
+
+void quicksort(int array[],int start,int ending)
+{
+int peo;
+ if(start<ending)
+ {
+  peo=seprate(array,start,ending); //it will send the peoit index after arrangement
+  //i have used to make sagment left smaller element and right larger then piot element
+  quicksort(array,start,peo-1);
+  //from 0 to peoit element right most side
+  quicksort(array,peo+1,ending);
+  }
+  else
+  {
+  return;
+  }
+}
+int seprate(int array[],int start,int end)
+{
+ int peo=array[end];//i have taken the ending as my peiot element
+ int pindex=start;//comparion strats from start
+ int temp;//for swping value
+ int temp1;
+ for(int i=start;i<end;i++)
+  {
+   if(array[i]<=peo)
+    {
+       temp=array[i];
+       array[i]=array[pindex];
+       array[pindex]=temp;
+	//this swap is bez i want to swap the place with lower value with higher value t0
+	//arrange small to left and larger to right
+       pindex++;
+    }
+  }
+   temp1=array[pindex];
+   array[pindex]=array[end];
+   array[end]=temp1;
+   //this swaping i have done because last the peoit element shoud be replcedd with its palce
+   return pindex;
+  }
+

@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<conio.h>
+
+int i=1,j=1,t=1;
+float sum;
+float funsin(float,int);
+void main()
+{
+ int n;
+ float x;
+ clrscr();
+ printf("enter the value of x");
+  scanf("%f",&x);
+
+ printf("enter how many times yu want to sum");
+  scanf("%d",&n);
+ x=x*3.14159/180;
+ printf("%f\n",x);
+//to convert degree to radian.
+ printf("the sum of sin is%.2lf",funsin(x,n));
+ getch();
+ }
+
+float funsin(float x,int b)
+{
+if(i<=b)
+ {
+ t=(t*(-1)*x*x)/(2*i*(2*i-1));
+  sum=sum+t;
+ i++;
+ return(funsin(x,b));
+}
+else
+return sum;
+}
+

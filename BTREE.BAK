@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<conio.h>
+struct tree
+{
+int data;
+struct tree *left;
+struct tree *right;
+}*t,*root=NULL;
+struct tree *insert(struct tree *root,int data);
+struct tree *ino(struct tree *root);
+struct tree *pre(struct tree *root);
+struct tree *post(struct tree *root);
+struct tree *create(int data);
+
+struct tree *create(int data)
+{
+//int data;
+//printf("enter the data\n");
+//scanf("%d",&data);
+t=(struct tree*)malloc(sizeof(struct tree));
+t->data=data;
+t->left=NULL;
+t->right=NULL;
+return t;
+}
+struct tree *insert(struct tree *root,int data)
+{
+if(root==NULL)
+return create(data);
+
+if(data<=root->data){
+root->left=insert(root->left,data);}
+else{
+root->right=insert(root->right,data); }
+
+ return root;
+}
+struct tree *ino(struct tree *root)
+{
+ if(root==NULL)
+  return;
+
+ return ino(root->left);
+  printf("%d->",root->data);
+return ino(root->right);
+
+  printf("\n");
+ }
+
+ struct tree *pre(struct tree *root)
+{
+ if(root==NULL)
+  return;
+
+  printf("%d->",root->data);
+ return  pre(root->left);
+return pre(root->right);
+
+printf("\n");
+
+ }
+  struct tree *post(struct tree *root)
+{
+ if(root==NULL)
+  return;
+
+
+ return post(root->left);
+  return post(root->right);
+  printf("%d->",root->data);
+
+printf("\n");
+ }
+
+ void main()
+ {
+
+  //int data;
+  clrscr();
+//  struct tree *root=NULL;
+  root=insert(root,8);
+  insert(root,40);
+  insert(root,20);
+  insert(root,3);
+  insert(root,14);
+  insert(root,5);
+ ino(root);
+pre(root);
+post(root);
+  getch();
+  free(root);
+  }

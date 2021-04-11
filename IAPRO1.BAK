@@ -1,0 +1,132 @@
+#include<stdio.h>
+#include<math.h>
+#include<conio.h>
+
+int consigcd(int k,int l,int minval);
+ int euclidsgcd(int k,int l);
+void schoolgcd(int k,int l);
+
+int p=0,q=0,i,j;
+int aa[5];
+int bb[5];
+int temp[5];
+
+void main()
+{
+int tempo;
+//int k=36,l=60;
+int k,l;
+clrscr();
+printf("enter the value of gcd");
+scanf("%d%d",&k,&l);
+schoolgcd();
+printf("................");
+printf("elucide gcd\n");
+
+tempo=consigcd(36,60,36);
+
+printf("consiquity number algo of gcd \t%d\n",tempo);
+printf(".................");
+tempo=euclidsgcd(36,60);
+printf("elucide algo of gcd \t%d\n",tempo);
+
+getch();
+}
+
+void schoolgcd(int a,int b)
+{
+int k=a;
+int l=b;
+int m=1;
+ for(i=0;i<=5;i++)
+     {
+      aa[i]=0;
+      bb[i]=0;
+      temp[i]=0;
+      }
+
+ while(k%2==0)
+ {
+   aa[p]=2;
+   k=k/2;
+   p++;
+ }
+
+ while(l%2==0)
+ {
+  bb[q]=2;
+  l=l/2;
+  q++;
+ }
+
+ for(i=3;i<=sqrt(k);i=i+2)
+ {
+  while(k%i==0)
+    {
+     aa[p]=i;
+     k=k/i;
+     p=p+1;
+    }
+  }
+
+  for(i=3;i<=sqrt(l);i=i+2)
+  {
+    while(l%i==0)
+    {
+     bb[q]=i;
+     l=l/i;
+     q=q+1;
+    }
+  }
+
+  if(k>2)
+   aa[p]=k;
+
+   if(l>2)
+    bb[q]=l;
+
+  printf("this is prime factor\n");
+  for(i=0;i<5;i++)
+    {
+      if(aa[i]==bb[i])
+      {
+	temp[i]=aa[i];
+      }
+
+   printf("\n%d\n",temp[i]);
+     }
+     for(i=0;i<5;i++)
+      {
+      if(temp[i]==0)
+       {
+       printf(".......");
+	break;
+       }
+       else
+       {
+	m=m*temp[i];
+       }
+      }
+       printf("\n%d\n",m);
+}
+
+int consigcd(int k,int l,int minval)
+{
+     if(k%minval==0&&l%minval==0)
+	   return minval;
+    else
+	   return consigcd(k,l,minval-1);
+ }
+
+ int euclidsgcd(int k,int l)
+ {
+  if(k==0)
+  {
+   return l;
+  }
+  else
+  {
+   return euclidsgcd(l%k,k);
+  }
+
+ }

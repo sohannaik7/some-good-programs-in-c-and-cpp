@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<conio.h>
+
+int fact(int i);
+void main()
+ {
+  char str[20],stack[10];
+  int i,n,top=-1,k,fac=5;
+  clrscr();
+  printf("enter the string\n");
+  gets(str);
+k=strlen(str);
+
+  if(top==k)
+   {
+    printf("stake overflow:\n");
+   }
+   else
+   {
+    for(i=0;i<=k;i++)
+    {
+    top=top++;
+    stack[top]=str[i];
+    }
+   }
+for(i=0;i<=k;i++)
+ {
+ top=top-1;
+  printf("%c",stack[top]);
+  }
+ printf("facto\n%d",fact(fac));
+getch();
+}
+
+int fact(int i)
+{
+ if((i==0)||(i==1)){
+  return 1;
+    }
+  else
+  {
+   printf("%d\n",i);
+   return i*fact(i-1);
+}
+}

@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<string.h>
+#include<conio.h>
+#include<process.h>
+       void insert();
+    void display();
+    void removee();
+struct node
+{
+    int id;
+    char name[20];
+    int rank;
+    struct node *link;
+}*start=NULL,*q,*t,*top;
+
+void main()
+{
+    int ch;
+
+    while(1)
+    {
+	printf("\n\n---- Singly Linked List(SLL) Menu ----");
+	printf("\n1.Insert\n2.Display\n3.Delete\n4.Exit\n\n");
+	printf("Enter your choice(1-4):");
+	scanf("%d",&ch);
+
+	switch(ch)
+	{
+	    case 1: insert();
+		   break;
+
+	    case 2: display();
+		    break;
+
+	    case 3: removee();
+		    break;
+	    case 4: exit(0);
+		    default: printf("Wrong Choice!!");
+	}
+    }
+   }
+
+void insert()
+{
+    int i,ran;
+    char nam[20];
+
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter student id\n:");
+    scanf("%d",&i);
+    printf("Enter student name\n:");
+    scanf("%s",&nam);
+    printf("Enter student rank\n:");
+    scanf("%d",&ran);
+    t->id=i;
+    strcpy(t->name,nam);
+    t->rank=ran;
+
+    if(start==NULL)
+    {
+	t->link=NULL;
+	start=t;
+      //top=t;
+    }
+    else
+    {
+	t->link=start;
+	start=t;
+	top=t;
+    }
+}
+
+void display()
+{
+    if(start==NULL)
+    {
+	printf("List is empty!!");
+    }
+    else
+    {
+	q=start;
+	printf("The linked list is:\n");
+	while(q!=NULL)
+	{
+	    printf("%d\t%s\t%d\n",q->id,q->name,q->rank);
+	    q=q->link;
+	}
+    }
+}
+
+void removee()
+{
+int re;
+//struct node *igot;
+    if(start==NULL)
+    {
+	printf("The stack list is empty!!");
+    }
+
+    else
+    {
+    //displaying before deleteing
+	q=start;
+       //printf("The linked list is:\n");
+	while(q!=NULL)
+	{
+	    printf("%d\t%s\t%d\n",q->id,q->name,q->rank);
+	    q=q->link;
+	}
+	printf("enter the record you want to remove\n");
+	scanf("%d",&re);
+	if(start->link==NULL&&start->id==re)
+	{
+	 start=NULL;
+	 return;
+	}
+	if(start->id==re)
+	{
+	q=start;
+	start=start->link;
+	free(q);
+	}
+ q=start;
+      while(q->link!=NULL)
+      {
+      t=q;
+       q=q->link;
+       if(q->id==re)
+       {
+	//igot=q;
+	break;
+       }
+      }
+       //printf("\n%d\t%d",t->id,q->id);
+       t->link=q->link;
+
+      printf("Deleting record \t %d\t%s\t%d\n",q->id,q->name,q->rank);
+	free(q);
+    }
+}

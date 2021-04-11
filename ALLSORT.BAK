@@ -1,0 +1,441 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+
+void selectsort(int arr[],int n);
+void swapp(int *a,int *b);
+
+void merge(int *arr,int lef,int right);
+void mergsorting(int arr[],int lef,int right);
+
+void heapsort(int arr[],int n);
+void heapfy(int arr[],int n,int i);
+int temp;
+
+void insertsort(int array[],int n);
+
+void quicksort(int array[],int start,int ending);
+int seprate(int array[],int s,int e);
+
+void timeresult();
+void main()
+{
+ int n,i,ch;
+ int array1[9999];
+ int array2[9999];
+ int array3[9999];
+ int array4[9999];
+ int arr[9999];
+  int ele;
+  int ass;
+  int start,ending;
+
+  //time
+  clock_t time_1,time_2,time_3,time_4,time_5;
+ clrscr();
+ while(1)
+ {
+ cout<<"enter which sorting you would like to perform"<<endl;
+ cout<<"1.selection sort\n2.merge sort\n3.heap sort\n4.insertion sort\n5.quick sort\n6.check time complexity\n7.exit\n"<<endl;
+ cin>>ch;
+ switch(ch)
+  {
+   case 1:
+   clrscr();
+   cout<<"enter the size of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     array1[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+   cout<<"the elements are "<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array1[i]<<"\t";
+   }
+    time_1=clock();
+     selectsort(array1,n);
+     cout<<n<<endl;
+   //............
+   // time_1=clock()-time_1;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array1[i]<<"\t";
+   }
+
+	break;
+
+case 2:
+       clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     array2[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array2[i]<<"\t";
+   }
+  time_2=clock();
+     ass=0;
+    mergsorting(array2,ass,n-1);
+     cout<<n<<endl;
+   //............
+   // time_2=clock()-time_2;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array2[i]<<"\t";
+   }
+   break;
+
+case 3:
+	clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     array3[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array3[i]<<"\t";
+   }
+   time_3=clock();
+     heapsort(array3,n);
+     cout<<n<<endl;
+   //............
+   // time_3=clock()-time_3;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array3[i]<<"\t";
+   }
+	break;
+
+case 4:
+      clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     array4[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array4[i]<<"\t";
+   }
+    time_4=clock();
+     //ass=0;
+    insertsort(array4,n);
+     cout<<n<<endl;
+   //............
+    //time_4=clock()-time_4;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<array4[i]<<"\t";
+   }
+
+   getch();
+	break;
+ case 5:
+	clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     arr[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+    time_5=clock();
+     //ass=0;
+     start=0;
+     ending=n-1;
+    quicksort(arr,start,ending);
+     cout<<n<<endl;
+   //............
+    //time_5=clock()-time_5;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+
+   }
+   getch();
+		   break;
+
+		   case 6:
+
+ cout<<"time consumed by selection sort"<<(float)time_1/CLOCKS_PER_SEC<<endl;
+   cout<<"time consumed by merge sort"<<(float)time_2/CLOCKS_PER_SEC<<endl;
+   cout<<"time consumed by heap sort"<<(float)time_3/CLOCKS_PER_SEC<<endl;
+   cout<<"time consumed by insertion sort"<<(float)time_4/CLOCKS_PER_SEC<<endl;
+   cout<<"time consumed by quick sort"<<(float)time_5/CLOCKS_PER_SEC<<endl;
+
+	      getch();
+
+
+	case 7: exit(1);
+	break;
+	}
+     }
+     //case 6:
+      // getch();
+	  // break;
+    // getch();
+}
+//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,all function
+
+
+ void selectsort(int arr[],int n)
+{
+ int i,j,min;
+
+ // now ill find the minimumm from the taken array list
+ //and ill replace the fiste element with min later
+ for(i=0;i<n-1;i++)  //for shifting towords right
+ {
+  min=i;
+  //list is start from 0
+   for(j=i+1;j<n;j++)
+    {
+     if(arr[j]<arr[min])
+	min=j;
+    }
+    //once i get the mininum value i should replace with ith element
+    //where ith element is fist from arr, other than sortted item,,,sorted items are left behind
+
+    swapp(&arr[min],&arr[i]);
+   }
+  }
+
+ void swapp(int *a,int *b)
+  {
+   int temp;
+   temp=*a;
+   *a=*b;
+   *b=temp;
+  }
+  //.................merge
+  void merge(int *arr,int lef,int right)
+{
+int mid=(lef+right)/2;
+int i=lef;// ith from first item from left
+int j=mid+1;// jth from the first elements from mid to end
+int kk=lef;  //new array first index
+
+int arroo[9999];
+
+while(i<=mid&&j<=right)
+{
+ if(arr[i]<=arr[j])
+ {
+ arroo[kk++]=arr[i++];
+ }
+ else
+ {
+ arroo[kk++]=arr[j++];
+ }
+}
+//i m goin gotcomaper the left first element with right part first element
+//and which ever is smaller im going to assign in new arrray callled as arroo
+
+while(i<=mid)
+ {
+	    arroo[kk++]=arr[i++];
+ }
+ while(j<=right)
+ {
+ arroo[kk++]=arr[j++];
+ }
+ //once all item is arranged now ill transer them into orginal array
+ for(int ii=lef;ii<=right;ii++)
+   arr[ii]=arroo[ii];
+}
+
+ void mergsorting(int arr[],int lef,int right)
+  {
+  if(lef>=right)
+  {
+  return;
+  }
+  int mid=(lef+right)/2;
+
+  mergsorting(arr,lef,mid);
+  mergsorting(arr,mid+1,right);
+
+  merge(arr,lef,right);
+
+  }
+
+  //......merge
+
+  void heapsort(int arr[],int n)
+  {
+   for(int i=n/2-1;i>=0;i--)
+   {
+   heapfy(arr,n,i);
+   }
+
+   for(int j=n-1;j>=0;j--)
+   {
+     // swap(arr[0],arr[i]);
+     temp=0;
+      temp=arr[0];
+      arr[0]=arr[j];
+      arr[j]=temp;
+      //i m sawping the last value with fiste element
+      // at this time the last j will be 5,4,3,2,1 keep om redusing coz
+      //last element will be redusing
+      // arr array and j as total zize and 0 from starting as begining
+      heapfy(arr,j,0);
+   }
+  }
+
+  void heapfy(int arr[],int n,int i)
+  {
+   int large=i;
+   int lef=2*i+1;
+   int rig=2*i+2;
+   //until left and right value is less tahn 6 the posint wont go further .
+
+   //....
+    //left node vale ue should must be less than the size if
+    // size is less than comaper left value withbegining
+   if((lef<n)&&(arr[lef]>arr[large])){
+    large=lef;         }
+
+   if((rig<n)&&(arr[rig]>arr[large])){
+      large=rig;       }
+    //if the both above state are fale than the bello large n i will be same
+    //paoint will return back to heapsort
+      if(large!=i)
+       {
+	//swap(arr[i],arr[large]);
+	  temp=0;
+	  temp=arr[i];
+	  arr[i]=arr[large];
+	  arr[large]=temp;
+
+	heapfy(arr,n,large);
+	}
+
+      }
+  //......insertion sort
+void insertsort(int array[],int n){
+   int key, j;
+   for(int i = 1; i<n; i++) {
+      key = array[i];//take value from the first and to compare
+      j = i;
+      while(j > 0 && array[j-1]>key) {
+	 array[j] = array[j-1];
+	 j--;
+      }
+      array[j] = key;   //insert in right place
+   }
+}
+
+// quick sort
+
+void quicksort(int array[],int start,int ending)
+{
+int peo;
+ if(start<ending)
+ {
+  peo=seprate(array,start,ending); //it will send the peoit index after arrangement
+  //i have used to make sagment left smaller element and right larger then piot element
+  quicksort(array,start,peo-1);
+  //from 0 to peoit element right most side
+  quicksort(array,peo+1,ending);
+  }
+  else
+  {
+  return;
+  }
+}
+int seprate(int array[],int start,int end)
+{
+ int peo=array[end];//i have taken the ending as my peiot element
+ int pindex=start;//comparion strats from start
+ int temp;//for swping value
+ int temp1;
+ for(int i=start;i<end;i++)
+  {
+   if(array[i]<=peo)
+    {
+       temp=array[i];
+       array[i]=array[pindex];
+       array[pindex]=temp;
+	//this swap is bez i want to swap the place with lower value with higher value t0
+	//arrange small to left and larger to right
+       pindex++;
+    }
+  }
+   temp1=array[pindex];
+   array[pindex]=array[end];
+   array[end]=temp1;
+   //this swaping i have done because last the peoit element shoud be replcedd with its palce
+   return pindex;
+  }
+
+

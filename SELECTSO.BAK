@@ -1,0 +1,113 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+void selectsort(int arr[],int n);
+void swapp(int *a,int *b);
+void main()
+{
+clock_t time_r,time_rr;
+int n,i,arr[9999],ele;
+//......
+int m,j,akk[9999];
+clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     arr[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+    time_r=clock();
+     selectsort(arr,n);
+     cout<<n<<endl;
+   //............
+    //time_r=clock()-time_r;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+   cout<<"time consumed"<<(float)time_r/CLOCKS_PER_SEC<<endl<<endl;
+
+   cout<<"will compare the time efficency with other size of array"<<endl;
+
+   cout<<"now enter the size of an array"<<endl;
+   cin>>m;
+
+
+  for(i=0;i<m;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+     ele=20+ele;
+
+
+     akk[i]=ele;
+   }
+   cout<<"the elements"<<endl;
+   for(i=0;i<m;i++)
+   {
+    cout<<akk[i]<<"\t";
+   }
+    time_rr=clock();
+     selectsort(arr,m);
+     cout<<m<<endl;
+     cout<<"sorted"<<endl;
+     for(i=0;i<m;i++)
+   {
+    cout<<akk[i]<<"\t";
+   }
+     cout<<"time consumed"<<(float)time_rr/CLOCKS_PER_SEC<<endl<<endl;
+
+    cout<<"for arr-"<<"\t"<<n<<"\t"<<"time was taken is-"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+    cout<<"for akk-"<<"\t"<<m<<"\t"<<"time was taken is-"<<(float)time_rr/CLOCKS_PER_SEC<<endl;
+
+ //return 1;
+   getch();
+  // return 1;
+  }
+void selectsort(int arr[],int n)
+{
+ int i,j,min;
+
+ // now ill find the minimumm from the taken array list
+ //and ill replace the fiste element with min later
+ for(i=0;i<n-1;i++)  //for shifting towords right
+ {
+  min=i;
+  //list is start from 0
+   for(j=i+1;j<n;j++)
+    {
+     if(arr[j]<arr[min])
+	min=j;
+    }
+    //once i get the mininum value i should replace with ith element
+    //where ith element is fist from arr, other than sortted item,,,sorted items are left behind
+
+    swapp(&arr[min],&arr[i]);
+   }
+  }
+
+ void swapp(int *a,int *b)
+  {
+   int temp;
+   temp=*a;
+   *a=*b;
+   *b=temp;
+  }

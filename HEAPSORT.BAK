@@ -1,0 +1,149 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+
+#include<time.h>
+//ing namespace std;
+	 // void swap(int a,int b);
+void heapsort(int arr[],int n);
+void heapfy(int arr[],int i,int n);
+
+int temp;
+void main()
+{
+clock_t time_r;
+int n,i,arr[9999],ele,size;
+clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%9999;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     arr[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+    time_r=clock();
+     heapsort(arr,n);
+     cout<<n<<endl;
+   //............
+    //time_r=clock()-time_r;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+   cout<<"time consumed"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+
+  // return 1;
+   getch();
+  // return 1;
+  }
+
+  void heapsort(int arr[],int n)
+  {
+   for(int i=n/2;i>=0;i--)
+   {
+   heapfy(arr,i,n);
+   }
+   }
+  /*
+   for(int j=n-1;j>=0;j--)
+   {
+     // swap(arr[0],arr[r
+     i]);
+     temp=0;
+      temp=arr[0];
+      arr[0]=arr[j];
+      arr[j]=temp;
+      //i m sawping the last value with fiste element
+      // at this time the last j will be 5,4,3,2,1 keep om redusing coz
+      //last element will be redusing
+      // arr array and j as total zize and 0 from starting as begining
+      heapfy(arr,j,0);
+   }
+   */
+
+
+
+ void heapfy(int arr[],int i,int n)
+  {
+
+  int j;
+  temp=arr[i];
+  j=2*i;
+
+  while(j<=n)
+  {
+   if((j<n)&&(arr[j+1]<arr[j])){
+    j=j+1;                  }
+
+  if(temp<arr[j])            {
+   break;                     }
+
+   else if(temp>=arr[j])
+    {
+     arr[j/2]=arr[j];
+     j=2*j;
+     }
+
+  }
+  arr[j/2]=temp;
+     return;
+}
+  /*
+  void heapfy(int arr[],int n,int i)
+  {
+
+   int large=i;
+   int lef=2*i+1; //99
+   int rig=2*i+2;
+   //until left and right value is less tahn 6 the posint wont go further .
+
+   //....
+    //left node vale ue should must be less than the size if
+    // size is less than comaper left value withbegining
+   if((lef<n)&&(arr[lef]>arr[large])){
+    large=lef;         }
+
+   if((rig<n)&&(arr[rig]>arr[large])){
+      large=rig;       }
+    //if the both above state are fale than the bello large n i will be same
+    //paoint will return back to heapsort
+      if(large!=i)
+       {
+	//swap(arr[i],arr[large]);
+	  temp=0;
+	  temp=arr[i];
+	  arr[i]=arr[large];
+	  arr[large]=temp;
+
+	heapfy(arr,n,large);
+	}
+      }
+    */
+  /*int swap(int a,int b)
+  {
+  int temp;
+  temp=a;
+  a=b;
+  b=temp;
+  return
+  }*/
+
+
+
+

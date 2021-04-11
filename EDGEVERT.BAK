@@ -1,0 +1,51 @@
+#include<conio.h>
+#include<stdio.h>
+int visited[10],ground[10];
+
+void main()
+{
+int ver,i,j;
+int graph[6][6],cal[6][6];
+ printf("enter the number vertex\n");
+ scanf("%d",&ver);
+ printf("ok! now enter the index value of it, i mean the weights of it\n");
+ for(i=0;i<ver;i++)
+  {
+   for(j=0;j<ver;j++)
+   {
+	  scanf("%d",&graph[i][j]);
+   }
+  }
+  for(i=0;i<ver;i++)
+  {
+   for(j=0;j<ver;j++)
+   {
+	  printf("\t%d",graph[i][j]);
+   }
+   printf("\n");
+  }
+
+  visited[0]=0;
+  while(ver==0)
+  {
+  cal[0][0]=0;
+   for(i=1;i<ver;i++)
+    {
+     if(graph[0][i]!=999)
+     {
+      cal[0][i]=graph[0][i];
+     }
+     else
+     {
+     cal[0][i]=graph[0][i];
+     }
+    }
+
+   }
+
+
+
+
+  getch();
+
+}

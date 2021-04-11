@@ -1,0 +1,220 @@
+#include<stdio.h>
+#include<conio.h>
+#include<process.h>
+
+struct node
+{
+    struct node *llink;
+    int data;
+    struct node *rlink;
+}*start=NULL,*q,*t,*end;
+
+int main()
+{
+    int ch;
+    void insert_beg();
+    void insert_end();
+    int insert_pos();
+    void display();
+    void delete_beg();
+    void delete_end();
+    while(1)
+    {
+	printf("\n\n---- Singly Linked List(SLL) Menu ----");
+	printf("\n1.Insert\n2.Display\n3.Delete\n4.Exit\n\n");
+	printf("Enter your choice(1-4):");
+	scanf("%d",&ch);
+
+	switch(ch)
+	{
+	    case 1:
+		    printf("\n---- Insert Menu ----");
+		    printf("\n1.Insert at beginning\n2.Insert at end\n3.Insert at specified position\n4.Exit");
+		    printf("\n\nEnter your choice(1-4):");
+		    scanf("%d",&ch);
+
+		    switch(ch)
+		    {
+			case 1: insert_beg();
+				break;
+			case 2: insert_end();
+				break;
+			case 3: insert_pos();
+				break;
+			case 4: exit(0);
+			default: printf("Wrong Choice!!");
+		    }
+		    break;
+
+	    case 2: display();
+		    break;
+
+	    case 3: printf("\n---- Delete Menu ----");
+		    printf("\n1.Delete from beginning\n2.Delete from end\n3.Exit");
+		    printf("\n\nEnter your choice(1-4):");
+		    scanf("%d",&ch);
+
+		    switch(ch)
+		    {
+			case 1: delete_beg();
+				break;
+			case 2: delete_end();
+				break;
+			case 3: exit(0);
+			default: printf("Wrong Choice!!");
+		    }
+		    break;
+	    case 4: exit(0);
+		    default: printf("Wrong Choice!!");
+	}
+    }
+    return 0;
+}
+
+void insert_beg()
+{
+    int num;
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&num);
+    t->data=num;
+
+    if(start==NULL)
+    {
+	t->llink=NULL;
+	start=t;
+	t->rlink=NULL;
+	//end=t;
+    }
+    else
+    {
+	t->rlink=start;
+	q=start;
+	start=t;
+	t->llink=NULL;
+	q->llink=t;
+	//end=t;
+    }
+}
+
+void insert_end()
+{
+    int num;
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&num);
+    t->data=num;
+    t->rlink=NULL;
+   // t->llink=end;
+
+    if(start==NULL)        //If list is empty
+    {
+	start=t;
+	t->llink=NULL;
+    }
+    else
+    {
+	q=start;
+	while(q->rlink!=NULL)
+	{
+	q=q->rlink;
+	}
+	q->rlink=t;
+	t->llink=q;
+    }
+}
+
+int insert_pos()
+{
+    int pos,i,num;
+    struct node *poss;
+    if(start==NULL)
+    {
+	printf("List is empty!!");
+	return 0;
+    }
+
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&num);
+    printf("Enter position to insert:");
+    scanf("%d",&pos);
+    t->data=num;
+
+    q=start;
+    for(i=1;i<=pos-1;i++)
+    {
+	if(q->rlink==NULL)
+	{
+	    printf("There are less elements!!");
+	    return 0;
+	}
+
+	q=q->rlink;
+    }
+
+    t->llink=q;
+    t->rlink=q->rlink;
+    poss=q->rlink;
+    q->rlink=t;
+
+    //for link rightside node. i named that as poss.
+    poss->llink=t;
+   // end=t;
+    return 0;
+}
+
+void display()
+{
+      struct node *spot;
+	spot=start;
+	 //im using spot to show data till last, coz normal isn't working properly
+	while(spot->rlink!=NULL)
+	{
+	  printf("%d->",spot->data);
+	    //spot=q;
+	    spot=spot->rlink;
+	}
+       /*	q=start;
+	while(spot->rlink!=NULL)
+	{
+	printf("%d->",q->data);
+	}*/
+	spot=start;
+}
+
+void delete_beg()
+{
+    if(start==NULL)
+    {
+	printf("The list is empty!!");
+    }
+    else
+    {
+	q=start;
+	start=q->rlink;
+	printf("Deleted element is %d",q->data);
+	free(q);
+
+    }
+}
+
+void delete_end()
+{
+    if(start==NULL)
+    {
+	printf("The list is empty!!");
+    }
+    else
+    {
+	q=start;
+	while(q->rlink!=NULL){
+	q=q->rlink;}
+
+	t=q->llink;
+	t->rlink=NULL;
+	printf("Deleted element is %d",q->data);
+	free(q);
+    }
+}
+

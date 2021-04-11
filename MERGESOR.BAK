@@ -1,0 +1,101 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+ void merge(int *arr,int lef,int right);
+void mergsorting(int arr[],int lef,int right);
+void main()
+{
+ int n,i,arr[9999],ele,size;
+ clock_t time_r;
+clrscr();
+
+  cout<<"enter the siz of an array"<<endl;
+  cin>>n;
+
+  for(i=0;i<n;i++)
+   {
+    ele=rand()%100;
+    if(ele==0)
+    {
+     ele=20+ele;
+    }
+
+     arr[i]=ele;
+   }
+  // size=sizeof(arr)/sizeof(arr[0]);
+
+   cout<<"the elements"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+    time_r=clock();
+    mergsorting(arr,0,n-1);
+     cout<<n<<endl;
+   //............
+    //time_r=clock()-time_r;
+   cout<<"the elements after sort"<<endl;
+   for(i=0;i<n;i++)
+   {
+    cout<<arr[i]<<"\t";
+   }
+   cout<<"time consumed"<<(float)time_r/CLOCKS_PER_SEC<<endl;
+
+  // return 1;
+   getch();
+  // return 1;
+  }
+
+  void mergsorting(int arr[],int lef,int right)
+  {
+  if(lef>=right)
+  {
+  return;
+  }
+  int mid=(lef+right)/2;
+
+  mergsorting(arr,lef,mid);
+  mergsorting(arr,mid+1,right);
+
+  merge(arr,lef,right);
+
+  }
+
+void merge(int *arr,int lef,int right)
+{
+int mid=(lef+right)/2;
+int i=lef;// ith from first item from left
+int j=mid+1;// jth from the first elements from mid to end
+int kk=lef;  //new array first index
+
+int arroo[9999];
+
+while(i<=mid&&j>=right)
+{
+ if(arr[i]<=arr[j])
+ {
+ arroo[kk]=arr[i];
+ }
+ else
+ {
+ arroo[kk]=arr[j];
+ }
+}
+//i m goin gotcomaper the left first element with right part first element
+//and which ever is smaller im going to assign in new arrray callled as arroo
+
+while(i<=mid)
+ {
+	    arroo[kk++]=arr[i++];
+ }
+ while(j<=right)
+ {
+ arroo[kk++]=arr[j++];
+ }
+ //once all item is arranged now ill transer them into orginal array
+ for(int ii=lef;ii<=right;ii++)
+   arr[ii]=arroo[ii];
+}
+

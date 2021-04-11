@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+//#define max 5
+
+struct student
+{
+int id;
+char name[20];
+int rank;
+};
+
+void main()
+ {
+ struct student stu[10];
+ const int max=5;
+  int top=-1,st[5];
+  int ch,val,i;
+  clrscr();
+  while(1)
+  {
+   printf("enter the vhoice\n");
+   printf("1.push\n2.pop\n3.display\n4.exit\n");
+   scanf("%d",&ch);
+   switch(ch)
+    {
+     case 1:   // printf("push operation\n");
+	       //	int val;
+		if(top==max-1)
+		 {
+		  printf("the stack overflow\n");
+		 }
+		 else
+
+	       {
+	       top=top++;
+		  printf("enter the id\n");
+		  scanf("%d",&stu[top].id);
+		  printf("enter the name\n");
+		  scanf("%s",&stu[top].name);
+		  printf("enter the rank\n");
+		  scanf("%d",&stu[top].rank);
+		   }
+		 break;
+     case 2: printf("pop op\n");
+	     if(top==-1)
+	     {
+	      printf("the stack is empty\n");
+	     }
+	      else
+	     {
+	     printf("the poped item is%d\n",stu[top].id);
+	     top=top--;
+	     }
+	     break;
+     case 3:
+	     if(top==-1)
+	     {
+	     printf("stack is empty\n");
+	     }
+	     else
+	     {
+	     printf("item in it are\n");
+	     for(i=top;i>=0;--i){
+	      printf("%d\t",stu[i].id);
+	      printf("%s\t",stu[i].name);
+	      printf("%d\n",stu[i].rank);
+	     }
+	     }
+	     break;
+     case 4: exit(0);
+		break;
+     default: printf("wrong choice\n");
+     break;
+		}
+     }
+   }

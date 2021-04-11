@@ -1,0 +1,104 @@
+#include<stdio.h>
+#include<conio.h>
+#include<process.h>
+       void insert();
+    void display();
+    void removee();
+struct node
+{
+    int data;
+    struct node *link;
+}*start=NULL,*q,*t,*temp1,*temp2;
+
+void main()
+{
+    int ch;
+
+    while(1)
+    {
+	printf("\n\n---- Singly Linked List(SLL) Menu ----");
+	printf("\n1.Insert\n2.Display\n3.Delete\n4.Exit\n\n");
+	printf("Enter your choice(1-4):");
+	scanf("%d",&ch);
+
+	switch(ch)
+	{
+	    case 1: insert();
+		   break;
+
+	    case 2: display();
+		    break;
+
+	    case 3: removee();
+		    break;
+	    case 4: exit(0);
+		    default: printf("Wrong Choice!!");
+	}
+    }
+  }
+
+void insert()
+{
+    int num;
+   // struct node *temp1,*temp2;
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&num);
+    t->data=num;
+
+    if(start==NULL)
+    {
+	t->link=NULL;
+	start=t;
+    }
+    q=start;
+    while(q->link!=NULL)
+     {
+      temp1=q;
+      temp2=q->link;
+      if((temp1->data<=num)&&(temp2->data<=num))
+      {
+       q->link=t;
+       t->link=temp2;
+       break;
+      }
+    t->link=NULL;
+    q->link=t;
+ }
+}
+
+
+void display()
+{
+    if(start==NULL)
+    {
+	printf("List is empty!!");
+    }
+    else
+    {
+	q=start;
+	printf("The linked list is:\n");
+	while(q!=NULL)
+	{
+	    printf("%d\n",q->data);
+	    q=q->link;
+	}
+    }
+}
+
+void removee()
+{
+    if(start==NULL)
+    {
+	printf("The stack list is empty!!");
+    }
+
+    else
+    {
+	q=start;
+	start=q->link;
+	printf("tocp item Deleted \t %d",q->data);
+	free(q);
+    }
+}
+
